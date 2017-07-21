@@ -1,4 +1,3 @@
 node_modules
-.idea/fileTemplates/
-.idea/workspace.xml
+.idea
 Would skip repository meadowlark/
