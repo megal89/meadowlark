@@ -1,18 +1,13 @@
-var express = require('express');
+let express = require('express');
+let fortune = require('./lib/fortune');
 
-var app = express();
+let app = express();
 
-var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
+let handlebars = require('express-handlebars').create({defaultLayout: 'main'});
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
-var fortunes  = [
-    "Победи свои страхи, или они победят тебя.",
-    "Рекам нужны истоки.",
-    "Небойся неведомго.",
-    "Тебя ждет приятный сюрприз.",
-    "Будь проще везде, где только можною"
-];
+
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
@@ -21,8 +16,7 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 app.get('/about', function (req, res) {
-    var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-    res.render('about', {fortune: randomFortune});
+    res.render('about', {fortune: fortune.getFortune()});
 });
 
 //пользовательская страница 404
